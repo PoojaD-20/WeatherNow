@@ -7,8 +7,8 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  // const apiKey = "6f18f0cdcbc26bd9eb7d7976075f5019";
-  const apiKey="ce4977d41cda86757424b3aaa38c2b3f"; 
+  const apiKey=process.env.REACT_APP_API_KEY; 
+  const apiURL=process.env.REACT_APP_API_URL;
 
   const fetchWeather = async () => {
     if(!city.trim()){
@@ -19,7 +19,7 @@ function App() {
     setError("");
     try {
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${apiKey}&units=metric`
+        `${apiURL}/weather?q=${city}&APPID=${apiKey}&units=metric`
       );
       if (!response.ok) {
         throw new Error("☹ City Not Found!!");
